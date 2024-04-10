@@ -24,7 +24,8 @@ import {
 } from "@/app/state/reducers/cities.reducer";
 
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { useAppDispatch } from "@/app/state/hooks";
 import { GcCity, Location } from "@/types";
 
 import { debounce } from "lodash";
@@ -32,7 +33,7 @@ import { SearchIcon } from "lucide-react";
 
 export const SearchDialog = () => {
   const [cityUserInput, setCityUserInput] = useState<any>("");
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const cities = useSelector(selectCities);
 
   const setSelectedTargetLocation = (location: Location) => {
