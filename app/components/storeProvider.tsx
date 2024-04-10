@@ -21,10 +21,10 @@ export default function StoreProvider({
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      storeRef.current.dispatch(fetchWeatherByLocation());
-      storeRef.current.dispatch(fetchPopularCitiesWeather());
-      storeRef.current.dispatch(fetchHourlySummaryByLocation());
-      storeRef.current.dispatch(fetchDailyForecast());
+      storeRef.current!.dispatch(fetchWeatherByLocation());
+      storeRef.current!.dispatch(fetchPopularCitiesWeather());
+      storeRef.current!.dispatch(fetchHourlySummaryByLocation());
+      storeRef.current!.dispatch(fetchDailyForecast());
     }
   }, []);
 

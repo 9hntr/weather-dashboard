@@ -59,7 +59,7 @@ export const SearchDialog = () => {
 
     // cleanup
     return () => debouncedFetch.cancel();
-  }, [cityUserInput]);
+  }, [dispatch, cityUserInput]);
 
   return (
     <Dialog>
