@@ -32,13 +32,6 @@ export const popularCities: GcCity[] = [
     lon: 0.1278,
   },
   {
-    name: "New York",
-    country: "US",
-    state: "New York",
-    lat: 40.7128,
-    lon: -74.006,
-  },
-  {
     name: "Sydney",
     country: "AU",
     state: "New South Wales",

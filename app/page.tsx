@@ -7,7 +7,7 @@ export default function Home() {
     <div className="pb-10 mx-[1rem] lg:mx-[2rem] xl:mx-[6rem] 2xl:mx-[16rem] m-auto">
       <Navbar />
       <GridLayout />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

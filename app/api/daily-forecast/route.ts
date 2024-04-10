@@ -6,18 +6,22 @@ export async function GET(req: NextRequest) {
     const searchParams = req.nextUrl.searchParams;
     const lat = searchParams.get("lat");
     const lon = searchParams.get("lon");
+    const forecastDays = searchParams.get("days");
+    const dailyQuery = [
+      "uv_index_max",
+      "temperature_2m_max",
+      "temperature_2m_min",
+    ];
 
     const data = (
       await meteoApiCtx.get(
-        `forecast?latitude=${lat}&longitude=${lon}&daily=uv_index_max,uv_index_clear_sky_max&timezone=auto&forecast_days=1`
+        `forecast?latitude=${lat}&longitude=${lon}&daily=${dailyQuery}&timezone=auto&forecast_days=${forecastDays}`
       )
     ).data;
 
     return NextResponse.json(data);
     // todo: add return type
   } catch (error) {
-    console.log("Error Getting Uv Data");
-
-    return new Response("Error getting Uv Data", { status: 500 });
+    return new Response("Error getting forecast", { status: 500 });
   }
 }

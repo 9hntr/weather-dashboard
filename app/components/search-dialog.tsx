@@ -11,8 +11,9 @@ import {
 } from "@/components/ui/dialog";
 
 import {
+  fetchDailyForecast,
+  fetchHourlySummaryByLocation,
   fetchWeatherByLocation,
-  selectTargetLocation,
   setTargetLocation,
 } from "@/app/state/reducers/weather.reducer";
 
@@ -27,7 +28,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { GcCity, Location } from "@/types";
 
 import { debounce } from "lodash";
-import { CommandIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 
 export const SearchDialog = () => {
   const [cityUserInput, setCityUserInput] = useState<any>("");
@@ -37,6 +38,8 @@ export const SearchDialog = () => {
   const setSelectedTargetLocation = (location: Location) => {
     dispatch(setTargetLocation(location));
     dispatch(fetchWeatherByLocation());
+    dispatch(fetchHourlySummaryByLocation());
+    dispatch(fetchDailyForecast());
   };
 
   const handleCityUserInput = (e: any) => {
@@ -61,9 +64,9 @@ export const SearchDialog = () => {
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline" className="text-sm inline-flex">
-          <p className="text-sm text-muted-foreground">Search here</p>
-          <div className="flex rounded-sm py-[3px] px-[4px] items-center gap-2 ml-[4rem] md:ml-[10rem] pr-[7px] dark:bg-[#262626] bg-slate-200">
-            <CommandIcon size={14} /> <span className="text-[11px]">F</span>
+          <p className="text-sm text-muted-foreground">Search location</p>
+          <div className="flex rounded-sm py-[3px] ml-8 items-center gap-2">
+            <SearchIcon size={15} />
           </div>
         </Button>
       </DialogTrigger>
@@ -71,33 +74,38 @@ export const SearchDialog = () => {
       <DialogContent className="p-0">
         <Command>
           <CommandInput
+            className="border-0 focus:ring-0"
             value={cityUserInput}
             onChangeCapture={handleCityUserInput}
             placeholder="Search city"
           />
-          <CommandList>{/*  */}</CommandList>
-          <ul className="px-3 pb-2">
-            <p className="p-2 mt-1 text-xs text-muted-foreground">
-              Suggestions
-            </p>
-            {cities.length &&
-              cities.map(
-                ({ name, state, country, lat, lon }: GcCity, idx: number) => (
-                  <li
-                    onClick={() => setSelectedTargetLocation({ lat, lon })}
-                    key={idx}
-                    className="my-2 p-2 hover:bg-accent rounded-sm cursor-pointer"
-                  >
-                    <DialogClose asChild>
-                      <p className="text-sm">
-                        {name}, {state && state + ", "}
-                        {country}
-                      </p>
-                    </DialogClose>
-                  </li>
+          <CommandList>
+            <ul className="px-3 pb-2">
+              <p className="p-2 mt-1 text-xs text-muted-foreground">
+                Suggestions
+              </p>
+              {cities.length ? (
+                cities.map(
+                  ({ name, state, country, lat, lon }: GcCity, idx: number) => (
+                    <li
+                      onClick={() => setSelectedTargetLocation({ lat, lon })}
+                      key={idx}
+                      className="my-2 p-2 hover:bg-accent rounded-sm cursor-pointer"
+                    >
+                      <DialogClose asChild>
+                        <p className="text-sm">
+                          {name}, {state && state + ", "}
+                          {country}
+                        </p>
+                      </DialogClose>
+                    </li>
+                  )
                 )
+              ) : (
+                <span className="p-2">No locations found.</span>
               )}
-          </ul>
+            </ul>
+          </CommandList>
         </Command>
       </DialogContent>
     </Dialog>

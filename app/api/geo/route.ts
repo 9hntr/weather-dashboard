@@ -17,7 +17,6 @@ export async function GET(req: NextRequest): Promise<any> {
     // todo: add return type
     return NextResponse.json(data);
   } catch (error) {
-    console.error("Something went wrong trying to fetch geocoded data");
     return new Response("Something went wrong trying to fetch geocoded data", {
       status: 500,
     });

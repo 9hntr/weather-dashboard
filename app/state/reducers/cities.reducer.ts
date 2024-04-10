@@ -7,11 +7,9 @@ import { DefaultState, GcCity } from "@/types";
 export const fetchCities = createAsyncThunk(
   "fetchCity",
   async (queryStr: string) => {
-    console.log("queryStr* ", queryStr);
     const response = await axios.get(`api/geo?query=${queryStr}`);
 
-    // todo: handle error
-    console.log("fetchCities data* ", response.data);
+    console.log("called fetchCities");
 
     return response.data;
   }
@@ -38,7 +36,6 @@ export const citiesSlice = createSlice({
       state.cities = popularCities;
     },
   },
-  // todo: handle loading/error/success states in components
   extraReducers: (builder) => {
     // fetchCities
     builder.addCase(fetchCities.pending, (state) => {
@@ -46,8 +43,7 @@ export const citiesSlice = createSlice({
     });
     builder.addCase(fetchCities.fulfilled, (state, action) => {
       state.isLoading = false;
-      if (!action.payload.length) state.cities = popularCities;
-      else state.cities = action.payload;
+      state.cities = action.payload;
     });
     builder.addCase(fetchCities.rejected, (state) => {
       state.isError = true;
