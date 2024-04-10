@@ -55,7 +55,7 @@ export const SearchDialog = () => {
       dispatch(fetchCities(cityUserInput));
     }, 500);
 
-    if (cityUserInput) debouncedFetch(cityUserInput);
+    if (cityUserInput) debouncedFetch();
 
     // cleanup
     return () => debouncedFetch.cancel();
