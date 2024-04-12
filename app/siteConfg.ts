@@ -1,7 +1,7 @@
 export default {
   links: {
-    githubProfile: "//github.com/sorrowintogold",
-    sourceCode: "//github.com/sorrowintogold/weather-dashboard",
+    githubProfile: "//github.com/kovltsx",
+    sourceCode: "//github.com/kovltsx/weather-dashboard",
   },
   defaultLocation: {
     lat: 10.5,
