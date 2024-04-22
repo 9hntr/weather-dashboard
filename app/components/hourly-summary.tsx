@@ -4,6 +4,7 @@ import moment from "moment";
 import { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectHourlySummary } from "../state/reducers/weather.reducer";
+import { Skeleton } from "@/components/ui/skeleton";
 
 // ! https://github.com/recharts/recharts/issues/3615#issuecomment-1636923358
 const supressTremorLibError = () => {
@@ -43,7 +44,7 @@ export const Hourly = () => {
   return (
     <Fragment>
       {chartData.length ? (
-        <Card>
+        <Card style={{ boxShadow: "none" }}>
           <p className="text-sm font-bold">Hourly summary</p>
           <AreaChart
             className="h-60"
@@ -59,7 +60,9 @@ export const Hourly = () => {
             yAxisWidth={40}
           />
         </Card>
-      ) : null}
+      ) : (
+        <Skeleton className="h-[19.3rem] w-full rounded-sm" />
+      )}
     </Fragment>
   );
 };

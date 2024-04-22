@@ -15,7 +15,6 @@ import {
   selectUVIndex,
 } from "../state/reducers/weather.reducer";
 
-// components
 import { Clock } from "./clock";
 import { kelvinToCelsius } from "@/lib/misc";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -24,7 +23,6 @@ import { Humidity } from "./humidity";
 import { Wind } from "./wind";
 import { UvIndex } from "./uv-index";
 
-// todo: move this
 export const getCurrentWeatherIcon = (
   weatherMain: string,
   iconSize: number
@@ -52,7 +50,7 @@ export const CurrentWeather = () => {
   const weatherData = useSelector(selectCurrentWeather);
 
   return (
-    <div className="p-6 rounded-md shadow-md dark:shadow-sm shadow-slate-200 dark:bg-dark-gray dark:shadow-slate-400 text-card-foreground">
+    <div className="p-6">
       {!weatherData || !uvIndex ? (
         <Fragment>
           <div className="text-left space-y-2">
@@ -81,7 +79,7 @@ export const CurrentWeather = () => {
                 getCurrentWeatherIcon(weatherData.weather[0].main, 60)}
             </div>
             <div className="flex flex-col pt-3">
-              <span className="text-center text-xl md:text-5xl font-extrabold">
+              <span className="text-center text-3xl md:text-5xl font-extrabold">
                 {weatherData && kelvinToCelsius(weatherData?.main?.temp)}
               </span>
               <p className="text-center text-sm mt-2">

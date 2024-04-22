@@ -9,8 +9,6 @@ export const fetchCities = createAsyncThunk(
   async (queryStr: string) => {
     const response = await axios.get(`api/geo?query=${queryStr}`);
 
-    console.log("called fetchCities");
-
     return response.data;
   }
 );
@@ -37,7 +35,6 @@ export const citiesSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // fetchCities
     builder.addCase(fetchCities.pending, (state) => {
       state.isLoading = true;
     });

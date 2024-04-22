@@ -20,7 +20,6 @@ export async function GET(req: NextRequest) {
     ).data;
 
     return NextResponse.json(data);
-    // todo: add return type
   } catch (error) {
     return new Response("Error getting forecast", { status: 500 });
   }

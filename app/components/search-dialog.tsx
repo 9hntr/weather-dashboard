@@ -51,13 +51,11 @@ export const SearchDialog = () => {
 
   useEffect(() => {
     const debouncedFetch = debounce(() => {
-      // ! no deberia dar problemas, ignora el error de ts
       dispatch(fetchCities(cityUserInput));
     }, 500);
 
     if (cityUserInput) debouncedFetch();
 
-    // cleanup
     return () => debouncedFetch.cancel();
   }, [dispatch, cityUserInput]);
 

@@ -13,8 +13,6 @@ export async function GET(req: NextRequest): Promise<any> {
       )
     ).data;
 
-    // todo: extend CityGc type and add local_names?: any
-    // todo: add return type
     return NextResponse.json(data);
   } catch (error) {
     return new Response("Something went wrong trying to fetch geocoded data", {

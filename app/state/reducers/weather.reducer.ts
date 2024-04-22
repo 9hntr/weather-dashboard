@@ -12,10 +12,6 @@ export const fetchWeatherByLocation = createAsyncThunk(
     const { lat, lon } = getState().weather.targetLocation;
     const response = await axios.get(`api/weather?lat=${lat}&lon=${lon}`);
 
-    // todo: handle error
-
-    console.log("called fetchWeatherByLocation");
-
     return response.data;
   }
 );
@@ -23,14 +19,12 @@ export const fetchWeatherByLocation = createAsyncThunk(
 export const fetchPopularCitiesWeather = createAsyncThunk(
   "fetchPopularCitiesWeather",
   async () => {
-    let cities: any = []; // todo: extend CityGc
+    let cities: any = [];
 
     for (let { lat, lon } of popularCities) {
       const response = await axios.get(`api/weather?lat=${lat}&lon=${lon}`);
       cities.push(response.data);
     }
-
-    console.log("called fetchPopularCitiesWeather");
 
     return cities;
   }
@@ -45,10 +39,6 @@ export const fetchDailyForecast = createAsyncThunk(
       `api/daily-forecast?lat=${lat}&lon=${lon}&days=8`
     );
 
-    // todo: handle error
-
-    console.log("called fetchDailyForecast");
-
     return response.data;
   }
 );
@@ -60,10 +50,6 @@ export const fetchHourlySummaryByLocation = createAsyncThunk(
     const { lat, lon } = getState().weather.targetLocation;
     const response = await axios.get(`api/hourly?lat=${lat}&lon=${lon}`);
 
-    // todo: handle error
-
-    console.log("called fetchHourlySummaryByLocation");
-
     return response.data;
   }
 );
@@ -73,7 +59,7 @@ interface State extends DefaultState {
   targetLocation: Location;
   uvIndex: number;
   popularCitiesWeather: any[];
-  forecastDaily: any; // todo: add types
+  forecastDaily: any;
   hourlySummary: any;
 }
 
@@ -98,7 +84,6 @@ export const weatherSlice = createSlice({
   },
   // ? será esta la luz y el camino?
   extraReducers: (builder) => {
-    // fetchWeatherByLocation
     builder.addCase(fetchWeatherByLocation.pending, (state) => {
       state.isLoading = true;
     });
@@ -110,7 +95,6 @@ export const weatherSlice = createSlice({
       state.isError = true;
     });
 
-    // fetchPopularCitiesWeather
     builder.addCase(fetchPopularCitiesWeather.pending, (state) => {
       state.isLoading = true;
     });
@@ -123,7 +107,6 @@ export const weatherSlice = createSlice({
       state.isError = true;
     });
 
-    // fetchHourlySummaryByLocation
     builder.addCase(fetchHourlySummaryByLocation.pending, (state) => {
       state.isLoading = true;
     });
@@ -135,7 +118,6 @@ export const weatherSlice = createSlice({
       state.isError = true;
     });
 
-    // fetchDailyForecast
     builder.addCase(fetchDailyForecast.pending, (state) => {
       state.isLoading = true;
     });

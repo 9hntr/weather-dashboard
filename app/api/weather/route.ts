@@ -14,7 +14,6 @@ export async function GET(request: NextRequest): Promise<any> {
     ).data;
 
     return NextResponse.json(data);
-    // todo: add return type
   } catch (error) {
     return new NextResponse(
       "Something went wrong trying to fetch forecast data",
